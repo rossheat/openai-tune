@@ -1,6 +1,6 @@
 # OpenAI Tune
 
-CLI tool for fine-tuning OpenAI models
+A pleasant CLI tool for fine-tuning OpenAI models
 
 ## Quickstart
 
@@ -36,12 +36,12 @@ echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.zshrc && source ~/.zshrc
 export OPENAI_API_KEY=<OPENAI_API_KEY>
 ```
 
-## Usage
+## Usage
 
 TODO 
 
 Please see [config.example.yml](config.example.yml) to view all of the options you can set for custom fine-tuning.
 
-## Weights & Biases Integration
+## Weights & Biases Integration
 
 You can configuration a W&B integration in your config file. Please follow these [instructions](https://platform.openai.com/docs/guides/fine-tuning#weights-and-biases-integration) to enable the W&B integration for your OpenAI account.

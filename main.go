@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/rossheat/openai-tune/create"
+	"github.com/rossheat/openai-tune/get"
 	"github.com/rossheat/openai-tune/list"
 	"github.com/rossheat/openai-tune/option"
 	"github.com/rossheat/openai-tune/upload"
@@ -20,6 +21,7 @@ func PrintUsage() {
 	fmt.Println("  openai-tune create -file-id <file-id> -model <model-name>  Create a fine-tuning job with default settings")
 	fmt.Println("  openai-tune create -config <path-to-yaml>      Create a fine-tuning job with custom settings")
 	fmt.Println("  openai-tune list [-limit <n>] [-after <job-id>] List fine-tuning jobs")
+	fmt.Println("  openai-tune get <job-id>                       Get information about a specific fine-tuning job")
 	os.Exit(1)
 }
 
@@ -99,6 +101,21 @@ func main() {
 		}
 
 		err := list.List(options)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+	case "get":
+		if len(os.Args) != 3 {
+			fmt.Println("please provide a job ID")
+			os.Exit(1)
+		}
+		options := option.Get{
+			JobID:        os.Args[2],
+			OpenAIAPIKey: openAIAPIKey,
+		}
+		err := get.Get(options)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
