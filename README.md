@@ -16,7 +16,7 @@ go install github.com/rossheat/openai-tune@latest
 
 3. Confirm installation: 
 ```bash
-openai-tune version
+openai-tune
 ```
 
 If you see "command not found" you may need to add `$GOPATH/bin` to your PATH: 
@@ -37,5 +37,7 @@ export OPENAI_API_KEY=<OPENAI_API_KEY>
 ```
 
 ## Usage
+TODO
 
+## Config File
 TODO
