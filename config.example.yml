@@ -1,5 +1,3 @@
-# View more of the options available to you here: 
-# https://platform.openai.com/docs/api-reference/fine-tuning/create
 # Fields are optional unless specified as required
 
 model: gpt-4o-mini-2024-07-18           # Required: The base model to fine-tune

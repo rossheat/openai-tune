@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/rossheat/openai-tune/create"
+	"github.com/rossheat/openai-tune/list"
 	"github.com/rossheat/openai-tune/option"
 	"github.com/rossheat/openai-tune/upload"
 	"github.com/rossheat/openai-tune/utils"
@@ -18,6 +19,7 @@ func PrintUsage() {
 	fmt.Println("  openai-tune upload -list                       List all uploaded files")
 	fmt.Println("  openai-tune create -file-id <file-id> -model <model-name>  Create a fine-tuning job with default settings")
 	fmt.Println("  openai-tune create -config <path-to-yaml>      Create a fine-tuning job with custom settings")
+	fmt.Println("  openai-tune list [-limit <n>] [-after <job-id>] List fine-tuning jobs")
 	os.Exit(1)
 }
 
@@ -80,6 +82,23 @@ func main() {
 			OpenAIAPIKey: openAIAPIKey,
 		}
 		err := create.Create(options)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+	case "list":
+		listCmd := flag.NewFlagSet("list", flag.ExitOnError)
+		limit := listCmd.Int("limit", 0, "Number of fine-tuning jobs to retrieve")
+		after := listCmd.String("after", "", "Retrieve jobs after this job ID")
+		listCmd.Parse(os.Args[2:])
+
+		options := option.List{
+			OpenAIAPIKey: openAIAPIKey,
+			Limit:        *limit,
+			After:        *after,
+		}
+
+		err := list.List(options)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
