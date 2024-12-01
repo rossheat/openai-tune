@@ -38,9 +38,44 @@ export OPENAI_API_KEY=<OPENAI_API_KEY>
 
 ## Usage
 
-TODO 
+Upload a JSONL file for fine-tuning:
+```bash
+openai-tune upload -file <path-to-jsonl-file>
+```
 
-Please see [config.example.yml](config.example.yml) to view all of the options you can set for custom fine-tuning.
+List all uploaded files with the purpose 'fine-tune':
+```bash
+openai-tune upload -list
+```
+
+Create a fine-tuning job with default settings:
+```bash
+openai-tune create -file-id <file-id> -model <model-name>
+```
+
+See this [list of models](https://platform.openai.com/docs/guides/fine-tuning/#which-models-can-be-fine-tuned) that can be fine-tuned.
+
+Create a fine-tuning job with custom settings from a YAML config:
+```bash
+openai-tune create -config <path-to-yaml>
+```
+
+See [config.example.yml](config.example.yml) for all available options.
+
+List fine-tuning jobs:
+```bash
+openai-tune list [-limit <n>] [-after <job-id>]
+```
+
+Get information about a specific fine-tuning job:
+```bash
+openai-tune get <job-id>
+```
+
+Cancel a fine-tuning job:
+```bash
+openai-tune cancel <job-id>
+```
 
 ## Weights & Biases Integration
 
