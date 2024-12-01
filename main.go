@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/rossheat/openai-tune/cancel"
 	"github.com/rossheat/openai-tune/create"
 	"github.com/rossheat/openai-tune/get"
 	"github.com/rossheat/openai-tune/list"
@@ -22,6 +23,7 @@ func PrintUsage() {
 	fmt.Println("  openai-tune create -config <path-to-yaml>      Create a fine-tuning job with custom settings")
 	fmt.Println("  openai-tune list [-limit <n>] [-after <job-id>] List fine-tuning jobs")
 	fmt.Println("  openai-tune get <job-id>                       Get information about a specific fine-tuning job")
+	fmt.Println("  openai-tune cancel <job-id>                    Cancel a fine-tuning job")
 	os.Exit(1)
 }
 
@@ -120,6 +122,21 @@ func main() {
 			fmt.Println(err)
 			os.Exit(1)
 		}
+	case "cancel":
+		if len(os.Args) != 3 {
+			fmt.Println("please provide a job ID")
+			os.Exit(1)
+		}
+		options := option.Cancel{
+			JobID:        os.Args[2],
+			OpenAIAPIKey: openAIAPIKey,
+		}
+		err := cancel.Cancel(options)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
 	default:
 		PrintUsage()
 	}
