@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/go,macos,git,dotenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,macos,git,dotenv
 
-
+config.yml
 openai-tune
 PLAN.md
 

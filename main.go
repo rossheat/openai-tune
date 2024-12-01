@@ -1,3 +1,4 @@
+// main.go
 package main
 
 import (
@@ -12,7 +13,12 @@ import (
 )
 
 func PrintUsage() {
-	panic("unimplemented")
+	fmt.Println("Usage:")
+	fmt.Println("  openai-tune upload -file <path-to-jsonl-file>  Upload a JSONL file for fine-tuning")
+	fmt.Println("  openai-tune upload -list                       List all uploaded files")
+	fmt.Println("  openai-tune create -file-id <file-id> -model <model-name>  Create a fine-tuning job with default settings")
+	fmt.Println("  openai-tune create -config <path-to-yaml>      Create a fine-tuning job with custom settings")
+	os.Exit(1)
 }
 
 func main() {
@@ -22,6 +28,7 @@ func main() {
 
 	createCmd := flag.NewFlagSet("create", flag.ExitOnError)
 	createFileID := createCmd.String("file-id", "", "File ID of JSONL data file uploaded to OpenAI")
+	createModel := createCmd.String("model", "gpt-4o-mini-2024-07-18", "Model to fine-tune (only used with -file-id)")
 	configFile := createCmd.String("config", "", "YAML file containing your custom fine-tune settings")
 
 	if len(os.Args) < 2 {
@@ -37,18 +44,15 @@ func main() {
 	switch os.Args[1] {
 	case "upload":
 		uploadCmd.Parse(os.Args[2:])
-
 		if (*uploadFile == "") == (!*uploadList) {
 			fmt.Println("please specify either -file or -list")
 			uploadCmd.PrintDefaults()
 			os.Exit(1)
 		}
-
 		options := option.Upload{
 			File:         *uploadFile,
 			OpenAIAPIKey: openAIAPIKey,
 		}
-
 		if *uploadList {
 			err := upload.List(options)
 			if err != nil {
@@ -64,23 +68,23 @@ func main() {
 		}
 	case "create":
 		createCmd.Parse(os.Args[2:])
-		if *createFileID == "" {
-			fmt.Println("please specify -file-id")
+		if (*createFileID == "") == (*configFile == "") {
+			fmt.Println("please specify either -file-id or -config")
 			createCmd.PrintDefaults()
 			os.Exit(1)
 		}
-
 		options := option.Create{
 			FileID:       *createFileID,
+			Model:        *createModel,
 			ConfigFile:   *configFile,
 			OpenAIAPIKey: openAIAPIKey,
 		}
-
 		err := create.Create(options)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-
+	default:
+		PrintUsage()
 	}
 }

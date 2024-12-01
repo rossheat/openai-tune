@@ -1,0 +1,31 @@
+# View more of the options available to you here: 
+# https://platform.openai.com/docs/api-reference/fine-tuning/create
+# Fields are optional unless specified as required
+
+model: gpt-4o-mini-2024-07-18           # Required: The base model to fine-tune
+training_file: file-train-abc  # Required: Your uploaded training file ID
+
+validation_file: file-validation-abc  # For validation metrics during training
+
+hyperparameters:
+  batch_size: auto        # "auto" or integer
+  learning_rate_multiplier: 0.8  # "auto" or float
+  n_epochs: 4            #  "auto" or integer
+
+suffix: my-custom-model # Suffix for model name (max 64 chars)
+
+# Weights & Biases Integration
+# IMPORTANT: Follow these instructions https://platform.openai.com/docs/guides/fine-tuning#weights-and-biases-integration 
+# to enable the W&B integration for you OpenAI account otherwise it will fail.
+integrations:
+  - type: wandb          # Required: Currently only "wandb" is supported
+    wandb:
+      project: "my-ft-project"    # Required: W&B project name
+      
+      name: "ft-experiment-1"     # Custom run name (defaults to job ID)
+      entity: "your-team"         # W&B username/team (defaults to API key's entity)
+      tags:                       # Custom tags (max 50 tags, each ≤64 chars)
+        - "production"
+        - "v2"
+
+seed: 42 # For reproducibility

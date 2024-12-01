@@ -37,7 +37,11 @@ export OPENAI_API_KEY=<OPENAI_API_KEY>
 ```
 
 ## Usage
-TODO
 
-## Config File
-TODO
+TODO 
+
+Please see [config.example.yml](config.example.yml) to view all of the options you can set for custom fine-tuning.
+
+## Weights & Biases Integration
+
+You can configuration a W&B integration in your config file. Please follow these [instructions](https://platform.openai.com/docs/guides/fine-tuning#weights-and-biases-integration) to enable the W&B integration for your OpenAI account.
