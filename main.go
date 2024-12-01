@@ -42,6 +42,11 @@ func main() {
 			Purpose:      *uploadPurpose,
 			OpenAIAPIKey: openAIAPIKey,
 		}
-		upload.Upload(options)
+		err := upload.Upload(options)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
 	}
 }
