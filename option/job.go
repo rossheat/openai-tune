@@ -1,6 +1,6 @@
 package option
 
-type Get struct {
+type Job struct {
     JobID        string
     OpenAIAPIKey string
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/rossheat/openai-tune/option"
 )
 
-func Get(options option.Get) error {
+func Get(options option.Job) error {
 	url := fmt.Sprintf("https://api.openai.com/v1/fine_tuning/jobs/%s", options.JobID)
 
 	req, err := http.NewRequest("GET", url, nil)

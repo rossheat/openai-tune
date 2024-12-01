@@ -9,7 +9,7 @@ import (
 	"github.com/rossheat/openai-tune/option"
 )
 
-func Cancel(options option.Cancel) error {
+func Cancel(options option.Job) error {
 	url := fmt.Sprintf("https://api.openai.com/v1/fine_tuning/jobs/%s/cancel", options.JobID)
 
 	req, err := http.NewRequest("POST", url, nil)

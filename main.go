@@ -113,7 +113,7 @@ func main() {
 			fmt.Println("please provide a job ID")
 			os.Exit(1)
 		}
-		options := option.Get{
+		options := option.Job{
 			JobID:        os.Args[2],
 			OpenAIAPIKey: openAIAPIKey,
 		}
@@ -127,7 +127,7 @@ func main() {
 			fmt.Println("please provide a job ID")
 			os.Exit(1)
 		}
-		options := option.Cancel{
+		options := option.Job{
 			JobID:        os.Args[2],
 			OpenAIAPIKey: openAIAPIKey,
 		}
