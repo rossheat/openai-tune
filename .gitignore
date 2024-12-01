@@ -3,6 +3,7 @@
 
 
 openai-tune
+PLAN.md
 
 ### dotenv ###
 .env
