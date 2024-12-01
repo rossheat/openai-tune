@@ -16,7 +16,8 @@ func PrintUsage() {
 
 func main() {
 	uploadCmd := flag.NewFlagSet("upload", flag.ExitOnError)
-	uploadFile := uploadCmd.String("file", "", "training data file (JSONL format) to upload")
+	uploadFile := uploadCmd.String("file", "", "JSONL data file to upload")
+	uploadList := uploadCmd.Bool("list", false, "list all uploaded files with purpose 'fine-tune'")
 
 	if len(os.Args) < 2 {
 		PrintUsage()
@@ -31,19 +32,30 @@ func main() {
 	switch os.Args[1] {
 	case "upload":
 		uploadCmd.Parse(os.Args[2:])
-		if *uploadFile == "" {
-			fmt.Println("please specify a file using -file")
+
+		if (*uploadFile == "") == (!*uploadList) {
+			fmt.Println("please specify either -file or -list")
 			uploadCmd.PrintDefaults()
 			os.Exit(1)
 		}
+
 		options := options.Upload{
 			File:         *uploadFile,
 			OpenAIAPIKey: openAIAPIKey,
 		}
-		err := upload.Upload(options)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+
+		if *uploadList {
+			err := upload.List(options)
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+		} else {
+			err := upload.Upload(options)
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
 		}
 
 	}
