@@ -1,7 +1,11 @@
 package upload
 
-import "fmt"
+import (
+	"fmt"
 
-func Upload(file *string, purpose *string) {
-	fmt.Printf("Upload function received file=%v and purpose=%v\n", *file, *purpose)
+	"github.com/rossheat/openai-tune/options"
+)
+
+func Upload(options options.Upload) {
+	fmt.Printf("Upload function received file=%v and purpose=%v\n", options.File, options.Purpose)
 }

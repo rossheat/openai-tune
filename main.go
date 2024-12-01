@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/rossheat/openai-tune/options"
 	"github.com/rossheat/openai-tune/upload"
+	"github.com/rossheat/openai-tune/utils"
 )
 
 func PrintUsage() {
@@ -21,6 +23,12 @@ func main() {
 		PrintUsage()
 	}
 
+	openAIAPIKey, err := utils.GetOpenAIAPIKeyFromEnv()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
 	switch os.Args[1] {
 	case "upload":
 		uploadCmd.Parse(os.Args[2:])
@@ -29,6 +37,11 @@ func main() {
 			uploadCmd.PrintDefaults()
 			os.Exit(1)
 		}
-		upload.Upload(uploadFile, uploadPurpose)
+		options := options.Upload{
+			File:         *uploadFile,
+			Purpose:      *uploadPurpose,
+			OpenAIAPIKey: openAIAPIKey,
+		}
+		upload.Upload(options)
 	}
 }
