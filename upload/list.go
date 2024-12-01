@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/rossheat/openai-tune/model"
-	"github.com/rossheat/openai-tune/options"
+	"github.com/rossheat/openai-tune/option"
 )
 
-func List(options options.Upload) error {
+func List(options option.Upload) error {
 	baseURL, err := url.Parse("https://api.openai.com/v1/files")
 	if err != nil {
 		return fmt.Errorf("error parsing URL: %v", err)

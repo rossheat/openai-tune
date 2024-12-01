@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rossheat/openai-tune/options"
+	"github.com/rossheat/openai-tune/option"
 	"github.com/rossheat/openai-tune/upload"
 	"github.com/rossheat/openai-tune/utils"
 )
@@ -39,7 +39,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		options := options.Upload{
+		options := option.Upload{
 			File:         *uploadFile,
 			OpenAIAPIKey: openAIAPIKey,
 		}

@@ -11,7 +11,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/rossheat/openai-tune/options"
+	"github.com/rossheat/openai-tune/option"
 )
 
 func isValidJSONL(filename string) (int, error) {
@@ -47,7 +47,7 @@ func isValidJSONL(filename string) (int, error) {
 	return lineCount, nil
 }
 
-func Upload(options options.Upload) error {
+func Upload(options option.Upload) error {
 	fmt.Printf("Upload function received options: %v\n", options)
 
 	lines, err := isValidJSONL(options.File)
