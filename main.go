@@ -17,7 +17,6 @@ func PrintUsage() {
 func main() {
 	uploadCmd := flag.NewFlagSet("upload", flag.ExitOnError)
 	uploadFile := uploadCmd.String("file", "", "training data file (JSONL format) to upload")
-	uploadPurpose := uploadCmd.String("purpose", "fine-tune", "purpose of the file")
 
 	if len(os.Args) < 2 {
 		PrintUsage()
@@ -39,7 +38,6 @@ func main() {
 		}
 		options := options.Upload{
 			File:         *uploadFile,
-			Purpose:      *uploadPurpose,
 			OpenAIAPIKey: openAIAPIKey,
 		}
 		err := upload.Upload(options)
