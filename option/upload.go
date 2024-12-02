@@ -1,7 +1,6 @@
 package option
 
 type Upload struct {
-	File string
+	File         string
 	OpenAIAPIKey string
 }
-
