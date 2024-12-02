@@ -79,4 +79,6 @@ openai-tune cancel <job-id>
 
 ## Weights & Biases Integration
 
-You can configuration a W&B integration in your config file. Please follow these [instructions](https://platform.openai.com/docs/guides/fine-tuning#weights-and-biases-integration) to enable the W&B integration for your OpenAI account.
+In order to enable logging with W&B, first please follow these [instructions](https://platform.openai.com/docs/guides/fine-tuning#weights-and-biases-integration) to enable the W&B integration for your OpenAI account.
+
+Once you've enabled the W&B integration on your OpenAI account, specified your W&B integration in your config file, and created your fine-tuning job, you can view the job in W&B by navigating to the W&B project you specified in the job creation request. Your run should be located at the URL: https://wandb.ai/<WANDB-ENTITY>/<WANDB-PROJECT>/runs/ftjob-ABCDEF
